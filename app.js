@@ -205,7 +205,7 @@ io.sockets.on('connection', function(socket) {
   // socket.on('respond', function(data) {
   //   console.log(data);
   // });
-  socket.on('disconnect', function() {
-    console.log('Socket disconnected');
+  socket.on('twitter-profile', function(data) {
+    socket.emit('twitter-profile', data);
   });
 });
