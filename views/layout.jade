@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app='wtmApp')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -7,23 +7,25 @@ html
     meta(name='description', content='')
     meta(name='author', content='')
     title #{title} | Hackathon Starter
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js")
+    script(src='/socket.io/socket.io.js?v=#{cacheBuster}')
     != css('styles')
     != js('application')
-    script(src='/socket.io/socket.io.js?v=#{cacheBuster}')
   body
     #wrap
       include partials/navigation
       .container
         include partials/flash
-        block content
+        .container(ng-view)
     include partials/footer
-    script.
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-XXXXX-X']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+    //- script.
+    //-   var _gaq = _gaq || [];
+    //-   _gaq.push(['_setAccount', 'UA-XXXXX-X']);
+    //-   _gaq.push(['_trackPageview']);
+    //-
+    //-   (function() {
+    //-     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    //-     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    //-     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    //-   })();
