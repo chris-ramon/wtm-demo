@@ -205,7 +205,8 @@ io.sockets.on('connection', function(socket) {
   // socket.on('respond', function(data) {
   //   console.log(data);
   // });
-  socket.on('twitter-profile', function(data) {
-    socket.emit('twitter-profile', data);
-  });
+});
+
+io.sockets.on('new-twitter-profile', function(data) {
+  socket.emit('twitter-profile', data);
 });
