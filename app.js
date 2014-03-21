@@ -201,12 +201,7 @@ io.configure(function() {
 });
 
 io.sockets.on('connection', function(socket) {
-  socket.emit('twitter-profile', { twitter: '@cramonn' });
-  // socket.on('respond', function(data) {
-  //   console.log(data);
-  // });
-});
-
-io.sockets.on('new-twitter-profile', function(data) {
-  socket.emit('twitter-profile', data);
+  socket.on('new-twitter-profile', function(data) {
+    socket.emit('twitter-profile', { twitter: '@cramonn' });
+  });
 });
