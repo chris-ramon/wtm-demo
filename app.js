@@ -202,6 +202,6 @@ io.configure(function() {
 
 io.sockets.on('connection', function(socket) {
   socket.on('new-twitter-profile', function(data) {
-    socket.emit('twitter-profile', { twitter: '@cramonn' });
+    socket.broadcast.emit('twitter-profile', data);
   });
 });
