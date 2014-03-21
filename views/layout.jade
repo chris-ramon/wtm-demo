@@ -9,6 +9,7 @@ html
     title #{title} | Hackathon Starter
     != css('styles')
     != js('application')
+    script(src='/socket.io/socket.io.js?v=#{cacheBuster}')
   body
     #wrap
       include partials/navigation

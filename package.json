@@ -44,7 +44,8 @@
     "twit": "~1.1.12",
     "underscore": "~1.6.0",
     "uglify-js": "~2.4.12",
-    "validator": "~3.4.0"
+    "validator": "~3.4.0",
+    "socket.io": "~0.9.16"
   },
   "devDependencies": {
     "mocha": "~1.17.1",

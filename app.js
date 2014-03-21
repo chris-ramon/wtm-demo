@@ -32,6 +32,9 @@ var passportConf = require('./config/passport');
  */
 
 var app = express();
+var http = require('http');
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
 /**
  * Mongoose configuration.
@@ -187,8 +190,22 @@ app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: '
  * Start Express server.
  */
 
-app.listen(app.get('port'), function() {
+server.listen(app.get('port'), function() {
   console.log("✔ Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 });
 
 module.exports = app;
+
+io.configure(function() {
+  io.set('transports', ['websocket']);
+});
+
+io.sockets.on('connection', function(socket) {
+  socket.emit('twitter-profile', { twitter: '@cramonn' });
+  // socket.on('respond', function(data) {
+  //   console.log(data);
+  // });
+  socket.on('disconnect', function() {
+    console.log('Socket disconnected');
+  });
+});
