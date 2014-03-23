@@ -201,8 +201,30 @@ io.configure(function() {
 });
 
 io.sockets.on('connection', function(socket) {
-  socket.emit('twitter-profile', {twitter: '@cramonn'});
+  //socket.emit('twitter-profile', {twitter: '@cramonn'});
   socket.on('new-twitter-profile', function(data) {
-    socket.broadcast.emit('twitter-profile', data);
+    //socket.emit('twitter-profile', {twitter: '@cramonnzzzz'});
+    //socket.broadcast.emit('twitter-profile', {twitter: '@cramonn'});
+    doTwitterResponse(socket, data);
   });
 });
+
+var doTwitterResponse = function(socket, data) {
+  var Twit = require('twit');
+  var T = new Twit({consumer_key: '8NNHLBEUdi0VTLjqNkhFCA',
+    consumer_secret: 'Pt2zEN9pbqIiMMD5VsaPmdWhUx3dgiXp9nzqpdmsoCE',
+    access_token: '59674623-X0D2wzGmMPz1U0edLycVda8oIR1AusBys9i7btrRH',
+    access_token_secret: 'YEXwuTZ26oGf27PpyKhfP9oEWQYMdvOZAQHgVk3Rw'});
+
+    T.get('users/show', {screen_name: data.twitter}, function(err, reply){
+        doEmitTwitterResponse(socket, reply);
+      });
+  }
+
+var doEmitTwitterResponse = function(socket, reply){
+  var data = {screen_name: reply.screen_name,
+    description: reply.description,
+    profile_image_url: reply.profile_image_url, url: reply.url};
+  socket.emit('twitter-profile', data);
+  socket.broadcast.emit('twitter-profile', data);
+}

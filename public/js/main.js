@@ -31,12 +31,16 @@ wtmApp.factory('socket', function (socketFactory) {
 });
 
 
-wtmApp.controller('MainCtrl', function($scope, socket) {
+wtmApp.controller('MainCtrl', function($scope, socket, $timeout) {
   $scope.twitters = [];
   //var socket = io.connect(window.location.href);
   socket.on('twitter-profile', function (data) {
     $scope.twitters.push(data);
   });
+
+  // socket.emit('new-twitter-profile', {twitter: '@cramonn'});
+
+  // $timeout(function(){ socket.emit('new-twitter-profile', {twitter: '@tenderlove'}); }, 3000);
 
   // var addTwitter = function(data) {
   //   $('#twitters').append("<div class='well'>"+JSON.stringify(data)+"</div>");

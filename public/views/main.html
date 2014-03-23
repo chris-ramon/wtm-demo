@@ -1,5 +1,24 @@
-<div id="twitters">
-  <div class='well' ng-repeat='profile in twitters'>
-    {{profile}}
-  </div>
+<div class="container">
+    <div class="page-header text-center">
+        <h1 id="timeline">Asistentes</h1>
+    </div>
+    <ul class="timeline">
+        <li ng-class-even="'timeline-inverted'" ng-repeat='profile in twitters'>
+          <div class="timeline-badge primary"><a><i class="fa fa-dot-circle-o invert" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <img class="profile-img img-responsive" src="{{profile.profile_image_url}}" />
+            </div>
+            <div class="timeline-body">
+              <p>{{profile.description}}</p>
+            </div>
+
+            <div class="timeline-footer">
+                <a ng-href="https://twitter.com/{{profile.screen_name}}" target="_blank"><i class="fa fa-share"></i></a>
+                <a class="pull-right">@{{profile.screen_name}}</a>
+            </div>
+          </div>
+        </li>
+        <li class="clearfix" style="float: none;"></li>
+    </ul>
 </div>
